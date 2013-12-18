@@ -6,7 +6,7 @@
 
   <!-- The Basics -->
   <groupId>metacake</groupId>
-  <artifactId>graphics engine</artifactId>
+  <artifactId>graphics-engine</artifactId>
   <version>a1.1</version>
   <packaging>jar</packaging>
   <dependencies>
