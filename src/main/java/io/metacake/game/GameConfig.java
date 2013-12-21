@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class GameConfig {
     public static ActionRecognizerName PRESS_W = PressRecognizer.generateName();
 
-    private KeyboardActionRecognizer recognizer = new PressRecognizer(PRESS_W);
+    private KeyboardActionRecognizer recognizer = new DoublePressRecognizer(PRESS_W);
     private KeyboardActionTrigger trigger = new KeyboardActionTrigger(KeyEvent.VK_W).bindRecognizers(recognizer);
 
     public Collection<ActionTrigger> getTriggers() {

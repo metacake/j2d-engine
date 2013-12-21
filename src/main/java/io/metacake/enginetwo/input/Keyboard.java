@@ -1,6 +1,7 @@
 package io.metacake.enginetwo.input;
 
 
+import io.metacake.core.common.MilliTimer;
 import io.metacake.core.common.window.CakeWindow;
 import io.metacake.core.input.ActionTrigger;
 import io.metacake.core.input.InputDeviceName;
@@ -15,6 +16,7 @@ import java.util.Collection;
 public class Keyboard implements InputDevice, KeyListener {
     public static final InputDeviceName NAME = new InputDeviceName();
     private Collection<KeyboardActionTrigger> triggers = new ArrayList<>();
+    private MilliTimer timer = new MilliTimer();
 
     @Override
     public InputDeviceName name() {
@@ -51,8 +53,10 @@ public class Keyboard implements InputDevice, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        long time = timer.poll();
         triggers.forEach(trigger -> {
             if (trigger.isTriggeredBy(e)) {
+                trigger.setTimestamp(time);
                 trigger.keyPressed();
             }
         });
@@ -60,8 +64,10 @@ public class Keyboard implements InputDevice, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        long time = timer.poll();
         triggers.forEach(trigger -> {
             if (trigger.isTriggeredBy(e)) {
+                trigger.setTimestamp(time);
                 trigger.keyReleased();
             }
         });

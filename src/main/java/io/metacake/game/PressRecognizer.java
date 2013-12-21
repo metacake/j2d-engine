@@ -12,17 +12,17 @@ class PressRecognizer implements KeyboardActionRecognizer {
     private ActionRecognizerName name;
     private boolean isHeld;
 
-    PressRecognizer(ActionRecognizerName name) {
+    public PressRecognizer(ActionRecognizerName name) {
         this.name = name;
     }
 
     @Override
-    public void keyPressed() {
+    public void keyPressed(long time) {
         isHeld = true;
     }
 
     @Override
-    public void keyReleased() {
+    public void keyReleased(long time) {
         isHeld = false;
     }
 

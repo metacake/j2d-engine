@@ -12,6 +12,7 @@ public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
 
     private int keyCode;
     private Collection<KeyboardActionRecognizer> recognizers = new ArrayList<>();
+    private long timestamp = 0;
 
     public KeyboardActionTrigger(int keyCode) {
         this.keyCode = keyCode;
@@ -33,10 +34,14 @@ public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
     }
 
     public void keyPressed() {
-        recognizers.forEach(KeyboardActionRecognizer::keyPressed);
+        recognizers.forEach(trigger -> trigger.keyPressed(timestamp));
     }
 
     public void keyReleased() {
-        recognizers.forEach(KeyboardActionRecognizer::keyReleased);
+        recognizers.forEach(trigger -> trigger.keyReleased(timestamp));
+    }
+
+    void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
