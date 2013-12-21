@@ -1,8 +1,8 @@
 import io.metacake.core.BootstrapBuilder;
 import io.metacake.core.common.CustomizableMap;
-import io.metacake.core.input.InputDeviceName;
-import io.metacake.core.input.TriggeredEvent;
 import io.metacake.core.output.RenderingInstructionBundle;
+import io.metacake.core.process.ActionRecognizer;
+import io.metacake.core.process.ActionRecognizerName;
 import io.metacake.core.process.state.GameState;
 import io.metacake.core.process.state.UserState;
 import io.metacake.enginetwo.output.DrawingDevice;
@@ -25,7 +25,7 @@ public class Main {
 
 class ExampleState extends UserState {
     @Override
-    public GameState tick(long delta, CustomizableMap<InputDeviceName, List<TriggeredEvent>> events) {
+    public GameState tick(long delta, CustomizableMap<ActionRecognizerName, ActionRecognizer> recognizers) {
         return this;
     }
 

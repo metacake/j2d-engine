@@ -10,6 +10,7 @@ import io.metacake.enginetwo.window.GraphicsWindow;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class DrawingDevice implements OutputDevice {
     }
 
     @Override
-    public void render(List<RenderingInstruction> r) {
+    public void render(Collection<RenderingInstruction> r) {
         sync.setState(r);
     }
 
@@ -61,7 +62,7 @@ public class DrawingDevice implements OutputDevice {
         bufferStrategy = frame.getBufferStrategy();
     }
 
-    private void draw(List<RenderingInstruction> instructions) {
+    private void draw(Collection<RenderingInstruction> instructions) {
         Graphics g = this.bufferStrategy.getDrawGraphics();
         Insets insets = this.frame.getInsets();
         g.translate(insets.right, insets.top);
