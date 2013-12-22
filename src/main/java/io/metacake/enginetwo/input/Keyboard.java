@@ -1,25 +1,22 @@
 package io.metacake.enginetwo.input;
 
 
+import io.metacake.core.common.MilliTimer;
 import io.metacake.core.common.window.CakeWindow;
 import io.metacake.core.input.ActionTrigger;
 import io.metacake.core.input.InputDeviceName;
-import io.metacake.core.input.TriggeredEvent;
 import io.metacake.core.input.system.InputDevice;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
-/**
- * @author florence
- * @author rpless
- */
 public class Keyboard implements InputDevice, KeyListener {
     public static final InputDeviceName NAME = new InputDeviceName();
-    private List<KeyboardTrigger> triggers = new ArrayList<>();
-    private List<TriggeredEvent> queuedEvents = new ArrayList<>();
+    private Collection<KeyboardActionTrigger> triggers = new ArrayList<>();
+    private MilliTimer timer = new MilliTimer();
 
     @Override
     public InputDeviceName name() {
@@ -28,14 +25,14 @@ public class Keyboard implements InputDevice, KeyListener {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void bind(CakeWindow window) {
-        CakeWindow<JFrame> jWindow = (CakeWindow<JFrame>) window;
-        jWindow.getRawWindow().addKeyListener(this);
+    public void bind(CakeWindow w) {
+        CakeWindow<JFrame> jFrameCakeWindow = (CakeWindow<JFrame>) w;
+        jFrameCakeWindow.getRawWindow().addKeyListener(this);
     }
 
     @Override
     public void addTrigger(ActionTrigger trigger) {
-        triggers.add((KeyboardTrigger) trigger);
+        triggers.add((KeyboardActionTrigger) trigger);
     }
 
     @Override
@@ -50,32 +47,28 @@ public class Keyboard implements InputDevice, KeyListener {
     public void shutdown() {}
 
     @Override
-    public List<TriggeredEvent> getTriggeredEvents() {
-        List<TriggeredEvent> events = new ArrayList<>(queuedEvents);
-        queuedEvents.clear();
-        return events;
+    public void keyTyped(KeyEvent e) {
+        e.consume();
     }
 
     @Override
-    public void keyTyped(KeyEvent event) {
-        event.consume();
-    }
-
-    @Override
-    public void keyPressed(KeyEvent event) {
-        handleKeyEvent(event);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent event) {
-        handleKeyEvent(event);
-    }
-
-    private void handleKeyEvent(KeyEvent event) {
+    public void keyPressed(KeyEvent e) {
+        long time = timer.poll();
         triggers.forEach(trigger -> {
-            Optional<TriggeredKeyboardEvent> optionalEvent = trigger.trigger(event);
-            if (optionalEvent.isPresent()) {
-                queuedEvents.add(optionalEvent.get());
+            if (trigger.isTriggeredBy(e)) {
+                trigger.setTimestamp(time);
+                trigger.keyPressed();
+            }
+        });
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        long time = timer.poll();
+        triggers.forEach(trigger -> {
+            if (trigger.isTriggeredBy(e)) {
+                trigger.setTimestamp(time);
+                trigger.keyReleased();
             }
         });
     }
