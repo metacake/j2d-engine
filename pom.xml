@@ -6,8 +6,8 @@
 
   <!-- The Basics -->
   <groupId>metacake</groupId>
-  <artifactId>graphics-engine</artifactId>
-  <version>a1.1</version>
+  <artifactId>j2d-engine</artifactId>
+  <version>a0.1.0</version>
   <packaging>jar</packaging>
   <dependencies>
     <dependency>
@@ -19,7 +19,7 @@
       <dependency>
           <groupId>metacake</groupId>
           <artifactId>metacake</artifactId>
-          <version>a2.0.0</version>
+          <version>b1.0.0</version>
       </dependency>
   </dependencies>
   <properties>
@@ -68,7 +68,7 @@
   <!-- More Project Information -->
   <name>CAKE Grapics2d Engine</name>
   <description>Example 2D engine made with Cake</description>
-  <url></url>
+  <url>metacake.io</url>
   <inceptionYear>2013</inceptionYear>
   <licenses>
     <license>
@@ -79,8 +79,6 @@
   </licenses>
   <organization></organization>
   <developers></developers>
-
-
 
   <repositories>
     <repository>
