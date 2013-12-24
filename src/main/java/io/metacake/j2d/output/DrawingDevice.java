@@ -1,17 +1,16 @@
-package io.metacake.enginetwo.output;
+package io.metacake.j2d.output;
 
 import io.metacake.core.common.TimedLoopThread;
 import io.metacake.core.common.window.CakeWindow;
 import io.metacake.core.output.OutputDeviceName;
 import io.metacake.core.output.RenderingInstruction;
 import io.metacake.core.output.system.OutputDevice;
-import io.metacake.enginetwo.window.GraphicsWindow;
+import io.metacake.j2d.window.GraphicsWindow;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @author florence

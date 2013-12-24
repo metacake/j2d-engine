@@ -1,4 +1,4 @@
-package io.metacake.enginetwo.output;
+package io.metacake.j2d.output;
 
 import io.metacake.core.output.RenderingInstruction;
 

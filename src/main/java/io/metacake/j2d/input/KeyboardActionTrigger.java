@@ -1,4 +1,4 @@
-package io.metacake.enginetwo.input;
+package io.metacake.j2d.input;
 
 import io.metacake.core.input.ActionTrigger;
 import io.metacake.core.input.InputDeviceName;

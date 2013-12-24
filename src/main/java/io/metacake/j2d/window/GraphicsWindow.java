@@ -1,4 +1,4 @@
-package io.metacake.enginetwo.window;
+package io.metacake.j2d.window;
 
 import io.metacake.core.common.window.CakeWindow;
 
