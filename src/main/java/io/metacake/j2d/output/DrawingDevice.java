@@ -55,17 +55,18 @@ public class DrawingDevice implements OutputDevice {
         bufferStrategy = frame.getBufferStrategy();
     }
 
+    @SuppressWarnings("unchecked")
     private void draw(Collection<RenderingInstruction> instructions) {
         Graphics parentGraphics = this.bufferStrategy.getDrawGraphics();
         Insets insets = this.frame.getInsets();
         parentGraphics.translate(insets.right, insets.top);
         parentGraphics.setColor(Color.WHITE);
         parentGraphics.fillRect(0, 0, frame.getWidth(), frame.getHeight());
-        instructions.forEach(instruction -> {
+        for (RenderingInstruction<Graphics> instruction : instructions) {
             Graphics graphics = parentGraphics.create();
-            ((DrawInstruction) instruction).render(graphics);
+            instruction.render(graphics);
             graphics.dispose();
-        });
+        }
         parentGraphics.dispose();
         this.bufferStrategy.show();
     }
