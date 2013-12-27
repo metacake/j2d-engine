@@ -20,16 +20,20 @@ public class ReleaseActionRecognizer extends KeyboardActionRecognizer {
         triggered = true;
     }
 
+    /**
+     * Effect: Always reset the Recognizer.
+     * @return true if triggered.
+     */
     @Override
     public boolean wasTriggered() {
-        return false;
+        boolean isTriggered = triggered;
+        triggered = false;
+        return isTriggered;
     }
 
     @Override
     public int triggerWeight() {
-        int weight = (triggered) ? 1 : 0;
-        triggered = false;
-        return weight;
+        return 1;
     }
 
     @Override
