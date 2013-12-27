@@ -1,4 +1,4 @@
-package io.metacake.j2d.process.recognizers;
+package io.metacake.j2d.process;
 
 import io.metacake.core.process.ActionRecognizer;
 import io.metacake.core.process.ActionRecognizerName;

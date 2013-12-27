@@ -1,7 +1,6 @@
-package io.metacake.j2d.process.recognizers;
+package io.metacake.j2d.process;
 
 import io.metacake.core.process.ActionRecognizerName;
-import io.metacake.j2d.process.recognizers.GameActionRecognizer;
 
 public abstract class KeyboardActionRecognizer extends GameActionRecognizer {
 

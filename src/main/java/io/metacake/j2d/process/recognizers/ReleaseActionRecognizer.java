@@ -2,6 +2,7 @@ package io.metacake.j2d.process.recognizers;
 
 
 import io.metacake.core.process.ActionRecognizerName;
+import io.metacake.j2d.process.KeyboardActionRecognizer;
 
 public class ReleaseActionRecognizer extends KeyboardActionRecognizer {
 
