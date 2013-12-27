@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author florence
@@ -20,8 +21,7 @@ public class DrawingDevice implements OutputDevice {
     private static final int NUM_BUFFERS = 2;
 
     public static final OutputDeviceName NAME = new OutputDeviceName();
-    private GraphicsWindow window;
-    private SyncState sync = new SyncState();
+    private volatile Collection<RenderingInstruction> instructions = Collections.emptyList();
     private BufferStrategy bufferStrategy;
     private JFrame frame;
     private TimedLoopThread drawingThread;
@@ -32,19 +32,13 @@ public class DrawingDevice implements OutputDevice {
     }
 
     @Override
-    public void render(Collection<RenderingInstruction> r) {
-        sync.setState(r);
+    public void render(Collection<RenderingInstruction> instructions) {
+        this.instructions = instructions;
     }
 
     @Override
     public void startOutputLoop() {
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                draw(sync.getState());
-            }
-        };
-        drawingThread = new TimedLoopThread(run);
+        drawingThread = new TimedLoopThread(() -> draw(instructions));
         drawingThread.start();
     }
 
@@ -55,24 +49,24 @@ public class DrawingDevice implements OutputDevice {
 
     @Override
     public void bind(CakeWindow w) {
-        window = (GraphicsWindow) w;
+        GraphicsWindow window = (GraphicsWindow) w;
         frame = window.getRawWindow();
         frame.createBufferStrategy(NUM_BUFFERS);
         bufferStrategy = frame.getBufferStrategy();
     }
 
     private void draw(Collection<RenderingInstruction> instructions) {
-        Graphics g = this.bufferStrategy.getDrawGraphics();
+        Graphics parentGraphics = this.bufferStrategy.getDrawGraphics();
         Insets insets = this.frame.getInsets();
-        g.translate(insets.right, insets.top);
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
-        for (RenderingInstruction d : instructions) {
-            Graphics graphics = g.create();
-            ((DrawInstruction) d).render(graphics);
+        parentGraphics.translate(insets.right, insets.top);
+        parentGraphics.setColor(Color.WHITE);
+        parentGraphics.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+        instructions.forEach(instruction -> {
+            Graphics graphics = parentGraphics.create();
+            ((DrawInstruction) instruction).render(graphics);
             graphics.dispose();
-        }
-        g.dispose();
+        });
+        parentGraphics.dispose();
         this.bufferStrategy.show();
     }
 }

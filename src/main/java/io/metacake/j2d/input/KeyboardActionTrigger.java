@@ -2,6 +2,7 @@ package io.metacake.j2d.input;
 
 import io.metacake.core.input.ActionTrigger;
 import io.metacake.core.input.InputDeviceName;
+import io.metacake.j2d.process.recognizers.KeyboardActionRecognizer;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
