@@ -12,7 +12,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Consumer;
 
+/**
+ *
+ */
 public class Keyboard implements InputDevice, KeyListener {
     public static final InputDeviceName NAME = new InputDeviceName();
     private Collection<KeyboardActionTrigger> triggers = new ArrayList<>();
@@ -52,23 +56,21 @@ public class Keyboard implements InputDevice, KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        long time = timer.poll();
-        triggers.forEach(trigger -> {
-            if (trigger.isTriggeredBy(e)) {
-                trigger.setTimestamp(time);
-                trigger.keyPressed();
-            }
-        });
+    public void keyPressed(KeyEvent event) {
+        keyHandler(event, KeyboardActionTrigger::keyPressed);
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent event) {
+        keyHandler(event, KeyboardActionTrigger::keyReleased);
+    }
+
+    private void keyHandler(KeyEvent event, Consumer<KeyboardActionTrigger> consumer) {
         long time = timer.poll();
         triggers.forEach(trigger -> {
-            if (trigger.isTriggeredBy(e)) {
+            if(trigger.isTriggeredBy(event)) {
                 trigger.setTimestamp(time);
-                trigger.keyReleased();
+                consumer.accept(trigger);
             }
         });
     }
