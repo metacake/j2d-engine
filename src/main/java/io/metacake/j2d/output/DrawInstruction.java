@@ -9,19 +9,28 @@ import java.awt.*;
  * @author rpless
  */
 public abstract class DrawInstruction implements RenderingInstruction<Graphics> {
-    public static final Color DEFAULT_COLOR = Color.BLACK;
-    protected int x, y;
-    protected Color c;
+    protected int x, y, width, height;
 
-    public DrawInstruction(int x, int y) {
-        this(x, y, DEFAULT_COLOR);
-    }
-
-    public DrawInstruction(int x, int y, Color c) {
+    public DrawInstruction(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
-        this.c = c;
+        this.width = width;
+        this.height = height;
     }
 
-    public abstract void render(Graphics g);
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

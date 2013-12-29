@@ -57,13 +57,13 @@ public class DrawingDevice implements OutputDevice {
 
     @SuppressWarnings("unchecked")
     private void draw(Collection<RenderingInstruction> instructions) {
-        Graphics parentGraphics = this.bufferStrategy.getDrawGraphics();
+        Graphics2D parentGraphics = (Graphics2D) this.bufferStrategy.getDrawGraphics();
         Insets insets = this.frame.getInsets();
         parentGraphics.translate(insets.right, insets.top);
         parentGraphics.setColor(Color.WHITE);
         parentGraphics.fillRect(0, 0, frame.getWidth(), frame.getHeight());
         for (RenderingInstruction<Graphics> instruction : instructions) {
-            Graphics graphics = parentGraphics.create();
+            Graphics2D graphics = (Graphics2D) parentGraphics.create();
             instruction.render(graphics);
             graphics.dispose();
         }
