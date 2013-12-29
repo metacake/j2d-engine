@@ -2,6 +2,7 @@ package io.metacake.j2d.input.keyboard;
 
 import io.metacake.core.input.ActionTrigger;
 import io.metacake.core.input.InputDeviceName;
+import io.metacake.j2d.input.GameActionTrigger;
 import io.metacake.j2d.process.KeyboardActionRecognizer;
 
 import java.awt.event.KeyEvent;
@@ -22,11 +23,10 @@ import java.util.Collection;
  * </p>
  * TODO: Currently, we only accept one KeyCode. What we really need is to accept multiple keycodes as well as Shift/alt/function Masks
  */
-public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
+public class KeyboardActionTrigger extends GameActionTrigger<KeyEvent> {
 
     private int keyCode;
     private Collection<KeyboardActionRecognizer> recognizers = new ArrayList<>();
-    private long timestamp = 0;
 
     public KeyboardActionTrigger(int keyCode) {
         this.keyCode = keyCode;
@@ -48,14 +48,10 @@ public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
     }
 
     public void keyPressed() {
-        recognizers.forEach(trigger -> trigger.keyPressed(timestamp));
+        recognizers.forEach(trigger -> trigger.keyPressed(this.getTimestamp()));
     }
 
     public void keyReleased() {
-        recognizers.forEach(trigger -> trigger.keyReleased(timestamp));
-    }
-
-    void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+        recognizers.forEach(trigger -> trigger.keyReleased(this.getTimestamp()));
     }
 }
