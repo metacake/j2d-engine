@@ -9,6 +9,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * A {@code KeyboardActionTrigger} is an {@link io.metacake.core.input.ActionTrigger} that recognizes
+ * {@link java.awt.event.KeyEvent}s.
+ * <p>
+ *     There are several notable implementation details.
+ *     Firstly, see the concern below.
+ *     Secondly, the timestamp is set externally (by the @{link Keyboard}) rather than internally on a call to
+ *     {@link KeyboardActionTrigger#keyPressed()} or {@link KeyboardActionTrigger#keyReleased()}. This decision was made for
+ *     the performance gain of making a system call once in the {@link io.metacake.j2d.input.keyboard.Keyboard} instead
+ *     of every time a call to a recognizer is made. Basically, we lose accuracy (and a several method arguments) in favor of performance.
+ * </p>
+ * TODO: Currently, we only accept one KeyCode. What we really need is to accept multiple keycodes as well as Shift/alt/function Masks
+ */
 public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
 
     private int keyCode;
