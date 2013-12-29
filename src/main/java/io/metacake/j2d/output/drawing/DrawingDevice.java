@@ -1,4 +1,4 @@
-package io.metacake.j2d.output;
+package io.metacake.j2d.output.drawing;
 
 import io.metacake.core.common.TimedLoopThread;
 import io.metacake.core.common.window.CakeWindow;
