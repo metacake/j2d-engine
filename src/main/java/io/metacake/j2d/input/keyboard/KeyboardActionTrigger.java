@@ -15,9 +15,9 @@ import java.util.Collection;
  * <p>
  *     There are several notable implementation details.
  *     Firstly, see the concern below.
- *     Secondly, the timestamp is set externally (by the @{link Keyboard}) rather than internally on a call to
+ *     Secondly, the timestamp is set externally (by the @{link KeyboardDevice}) rather than internally on a call to
  *     {@link KeyboardActionTrigger#keyPressed()} or {@link KeyboardActionTrigger#keyReleased()}. This decision was made for
- *     the performance gain of making a system call once in the {@link io.metacake.j2d.input.keyboard.Keyboard} instead
+ *     the performance gain of making a system call once in the {@link KeyboardDevice} instead
  *     of every time a call to a recognizer is made. Basically, we lose accuracy (and a several method arguments) in favor of performance.
  * </p>
  * TODO: Currently, we only accept one KeyCode. What we really need is to accept multiple keycodes as well as Shift/alt/function Masks
@@ -39,7 +39,7 @@ public class KeyboardActionTrigger implements ActionTrigger<KeyEvent> {
 
     @Override
     public InputDeviceName bindingDevice() {
-        return Keyboard.NAME;
+        return KeyboardDevice.NAME;
     }
 
     public KeyboardActionTrigger bindRecognizers(KeyboardActionRecognizer... recognizers) {

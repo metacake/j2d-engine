@@ -4,7 +4,7 @@ import io.metacake.core.process.ActionRecognizerName;
 
 /**
  * The {@code KeyboardActionRecognizer} represents a recognizer that is only used for the actions triggered by a
- * {@link io.metacake.j2d.input.keyboard.Keyboard}.
+ * {@link io.metacake.j2d.input.keyboard.KeyboardDevice}.
  */
 public abstract class KeyboardActionRecognizer extends GameActionRecognizer {
 
