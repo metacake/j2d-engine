@@ -3,7 +3,7 @@ package io.metacake.j2d.output.drawing.instructions;
 import java.awt.*;
 
 /**
- *
+ * Draws a rectangle centered on (x, y) with the given width, height, and color.
  */
 public class DrawRectangleInstruction extends ColoredDrawInstruction {
 
@@ -14,6 +14,8 @@ public class DrawRectangleInstruction extends ColoredDrawInstruction {
     @Override
     public void render(Graphics2D context) {
         super.render(context);
-        context.fillRect(x, y, getWidth(), getHeight());
+        int width = getWidth();
+        int height = getHeight();
+        context.fillRect(x - (width / 2), y - (height / 2), width, height);
     }
 }
