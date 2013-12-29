@@ -7,18 +7,17 @@ import java.awt.*;
  */
 public class DrawCircleInstruction extends ColoredDrawInstruction {
 
-    public DrawCircleInstruction(int x, int y, int radius, Color color) {
-        super(x, y, radius, radius, color);
-    }
+    private int radius;
 
-    protected int getRadius() {
-        return getWidth();
+    public DrawCircleInstruction(int x, int y, int radius, Color color) {
+        super(x, y, color);
+        this.radius = radius;
     }
 
     @Override
     public void render(Graphics2D context) {
         super.render(context);
-        int diameter = 2 * getRadius();
-        context.fillOval(x - getRadius(), y - getRadius(), diameter, diameter);
+        int diameter = 2 * radius;
+        context.fillOval(x - radius, y - radius, diameter, diameter);
     }
 }

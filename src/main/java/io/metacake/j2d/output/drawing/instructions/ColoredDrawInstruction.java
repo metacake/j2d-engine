@@ -10,8 +10,8 @@ import java.awt.*;
 public abstract class ColoredDrawInstruction extends DrawInstruction {
     private Color color;
 
-    protected ColoredDrawInstruction(int x, int y, int width, int height, Color color) {
-        super(x, y, width, height);
+    protected ColoredDrawInstruction(int x, int y, Color color) {
+        super(x, y);
         this.color = color;
     }
 

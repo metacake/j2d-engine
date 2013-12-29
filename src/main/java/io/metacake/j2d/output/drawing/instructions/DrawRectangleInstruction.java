@@ -7,15 +7,17 @@ import java.awt.*;
  */
 public class DrawRectangleInstruction extends ColoredDrawInstruction {
 
+    private int width, height;
+
     public DrawRectangleInstruction(int x, int y, int width, int height, Color color) {
-        super(x, y, width, height, color);
+        super(x, y, color);
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public void render(Graphics2D context) {
         super.render(context);
-        int width = getWidth();
-        int height = getHeight();
         context.fillRect(x - (width / 2), y - (height / 2), width, height);
     }
 }
