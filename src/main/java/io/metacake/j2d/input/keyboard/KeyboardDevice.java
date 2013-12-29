@@ -41,7 +41,7 @@ public class KeyboardDevice implements InputDevice, KeyListener {
 
     @Override
     public void releaseTriggers() {
-        triggers.clear();
+        triggers = new ArrayList<>();
     }
 
     @Override
@@ -49,11 +49,6 @@ public class KeyboardDevice implements InputDevice, KeyListener {
 
     @Override
     public void shutdown() {}
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        e.consume();
-    }
 
     @Override
     public void keyPressed(KeyEvent event) {
@@ -73,5 +68,10 @@ public class KeyboardDevice implements InputDevice, KeyListener {
                 consumer.accept(trigger);
             }
         });
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        e.consume();
     }
 }
