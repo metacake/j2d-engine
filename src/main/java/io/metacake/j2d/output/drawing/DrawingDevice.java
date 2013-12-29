@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * The {@code DrawingDevice} is a n {@link io.metacake.core.output.system.OutputDevice} that uses the Java Graphics API
+ * The {@code DrawingDevice} is an {@link io.metacake.core.output.system.OutputDevice} that uses the Java Graphics API
  * to draw to a {@link javax.swing.JFrame}.
  * <p>
  *     Notable Implementation Choices:
