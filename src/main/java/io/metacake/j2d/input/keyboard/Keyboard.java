@@ -1,4 +1,4 @@
-package io.metacake.j2d.input;
+package io.metacake.j2d.input.keyboard;
 
 
 import io.metacake.core.common.MilliTimer;
