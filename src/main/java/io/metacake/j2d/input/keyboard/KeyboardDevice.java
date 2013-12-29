@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  *
  */
 public class KeyboardDevice implements InputDevice, KeyListener {
-    public static final InputDeviceName NAME = new InputDeviceName();
+    public static final InputDeviceName NAME = new InputDeviceName("Keyboard");
     private Collection<KeyboardActionTrigger> triggers = new ArrayList<>();
     private MilliTimer timer = new MilliTimer();
 
