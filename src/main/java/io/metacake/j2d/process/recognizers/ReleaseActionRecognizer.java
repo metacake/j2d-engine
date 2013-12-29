@@ -2,12 +2,12 @@ package io.metacake.j2d.process.recognizers;
 
 
 import io.metacake.core.process.ActionRecognizerName;
-import io.metacake.j2d.process.KeyboardActionRecognizer;
+import io.metacake.j2d.process.PressReleaseActionRecognizer;
 
 /**
  * The {@code ReleaseActionRecognizer} recognizes actions that involve releasing a key.
  */
-public class ReleaseActionRecognizer extends KeyboardActionRecognizer {
+public class ReleaseActionRecognizer extends PressReleaseActionRecognizer {
 
     private boolean triggered = false;
 
@@ -15,12 +15,11 @@ public class ReleaseActionRecognizer extends KeyboardActionRecognizer {
         super(name);
     }
 
+    @Override
+    public void pressed(long timestamp) {}
 
     @Override
-    public void keyPressed(long timestamp) {}
-
-    @Override
-    public void keyReleased(long timestamp) {
+    public void released(long timestamp) {
         triggered = true;
     }
 
