@@ -10,13 +10,11 @@ import java.awt.*;
  * @author rpless
  */
 public abstract class DrawInstruction implements RenderingInstruction<Graphics2D> {
-    protected int x, y, width, height;
+    protected int x, y;
 
-    public DrawInstruction(int x, int y, int width, int height) {
+    public DrawInstruction(int x, int y) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
     }
 
     public int getX() {
@@ -25,13 +23,5 @@ public abstract class DrawInstruction implements RenderingInstruction<Graphics2D
 
     public int getY() {
         return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 }
