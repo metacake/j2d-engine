@@ -6,7 +6,7 @@ public class DrawTextInstruction extends ColoredDrawInstruction {
 
     private String text;
 
-    protected DrawTextInstruction(String text, int x, int y, Color color) {
+    public DrawTextInstruction(String text, int x, int y, Color color) {
         super(x, y, color);
         this.text = text;
     }
