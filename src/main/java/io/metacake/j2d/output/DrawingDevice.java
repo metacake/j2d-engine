@@ -14,6 +14,17 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
+ * The {@code DrawingDevice} is a n {@link io.metacake.core.output.system.OutputDevice} that uses the Java Graphics API
+ * to draw to a {@link javax.swing.JFrame}.
+ * <p>
+ *     Notable Implementation Choices:
+ *     This device will create a new {@link java.awt.Graphics2D} object for every {@link io.metacake.core.output.RenderingInstruction}
+ *     that is sent to it. This is preserves the initial transformation to account for the {@link javax.swing.JFrame}'s
+ *     {@link java.awt.Insets} and too remove any changes in state that are introduced by drawing various objects to
+ *     the screen.
+ *     A {@link java.awt.image.BufferStrategy} is also used to create multiple drawing buffers to eliminate any graphical
+ *     flicker.
+ * </p>
  * @author florence
  * @author rpless
  */
