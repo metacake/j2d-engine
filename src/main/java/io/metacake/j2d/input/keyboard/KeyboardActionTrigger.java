@@ -3,6 +3,7 @@ package io.metacake.j2d.input.keyboard;
 import io.metacake.core.input.InputDeviceName;
 import io.metacake.j2d.input.GameActionTrigger;
 import io.metacake.j2d.process.PressReleaseActionRecognizer;
+import io.metacake.j2d.process.keyrecognizers.KeyActionRecognizer;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.Collection;
 public class KeyboardActionTrigger extends GameActionTrigger<KeyEvent> {
 
     private int keyCode;
-    private Collection<PressReleaseActionRecognizer> recognizers = new ArrayList<>();
+    private Collection<KeyActionRecognizer> recognizers = new ArrayList<>();
 
     public KeyboardActionTrigger(int keyCode) {
         this.keyCode = keyCode;
@@ -41,16 +42,16 @@ public class KeyboardActionTrigger extends GameActionTrigger<KeyEvent> {
         return KeyboardDevice.NAME;
     }
 
-    public KeyboardActionTrigger bindRecognizers(PressReleaseActionRecognizer... recognizers) {
+    public KeyboardActionTrigger bindRecognizers(KeyActionRecognizer... recognizers) {
         this.recognizers.addAll(Arrays.asList(recognizers));
         return this;
     }
 
     public void keyPressed() {
-        recognizers.forEach(trigger -> trigger.pressed(this.getTimestamp()));
+        recognizers.forEach(trigger -> trigger.keyPressed(this.getTimestamp()));
     }
 
     public void keyReleased() {
-        recognizers.forEach(trigger -> trigger.released(this.getTimestamp()));
+        recognizers.forEach(trigger -> trigger.keyReleased(this.getTimestamp()));
     }
 }

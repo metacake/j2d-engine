@@ -9,7 +9,6 @@ import io.metacake.core.process.ActionRecognizerName;
  * <p>
  *     The main piece of shared behavior that it encapsulates, is the presence of an {@link io.metacake.core.process.ActionRecognizerName}
  *     in all subclasses of {@code GameActionRecognizer}.
- * </p>
  */
 public abstract class GameActionRecognizer implements ActionRecognizer {
 

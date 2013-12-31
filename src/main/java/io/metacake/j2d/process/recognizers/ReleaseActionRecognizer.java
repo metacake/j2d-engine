@@ -30,7 +30,7 @@ public class ReleaseActionRecognizer extends PressReleaseActionRecognizer {
     @Override
     public boolean wasTriggered() {
         boolean isTriggered = triggered;
-        triggered = false;
+        setTriggered(false);
         return isTriggered;
     }
 
@@ -41,6 +41,10 @@ public class ReleaseActionRecognizer extends PressReleaseActionRecognizer {
 
     @Override
     public void forgetActions() {
-        triggered = false;
+        setTriggered(false);
+    }
+
+    protected void setTriggered(boolean triggered) {
+        this.triggered = triggered;
     }
 }
